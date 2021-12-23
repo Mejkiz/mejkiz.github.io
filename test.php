@@ -1,1 +1,1 @@
-<? echo $_SERVER['SCRIPT_FIELNAME']>
+<? echo $_SERVER['SCRIPT_FILENAME']; ?>
