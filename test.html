@@ -23,20 +23,10 @@
   </head>
   <body>
     <div id="video-container">
-      <video id="yohoho" data-kinopoisk="" controls>
+      <video id="yohoho" data-kinopoisk="<?php echo $_GET['id'] ?? ''; ?>" controls>
         <source src="//yohoho.cc/yo.mp4" type="video/mp4">
       </video>
       <script src="//yohoho.cc/yo.js"></script>
     </div>
-    
-    <script>
-      // Получить параметр запроса "id" из URL-адреса страницы
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-      
-      // Установить значение "data-kinopoisk" для видео на значение параметра "id"
-      const video = document.getElementById('yohoho');
-      video.setAttribute('data-kinopoisk', id);
-    </script>
   </body>
 </html>
