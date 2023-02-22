@@ -1,36 +1,50 @@
-<!DOCTYPE html>
+<video id="yohoho" data-kinopoisk="401522" controls>
+  <source src="//yohoho.cc/yo.mp4" type="video/mp4">
+</video>
+
+<label for="kinopoisk-input">Введите значение атрибута "data-kinopoisk":</label>
+<input id="kinopoisk-input" type="text">
+<button onclick="updateKinopoisk()">Применить</button>
+
+<script src="//yohoho.cc/yo.js"></script>
 <script>
-    var id = window.location.hash.substr(1);
-    document.getElementById("yohoho").setAttribute("data-kinopoisk", id);
-  </script>
-<html>
-  <head>
-    <title>Мой сайт</title>
-    <style>
-      body {
-        background-color: #242424;
-      }
-      
-      #video-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
-        margin-top: 50px;
-      }
-      
-      video {
-        max-width: 100%;
-        max-height: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="video-container">
-      <video id="yohoho" data-kinopoisk="" controls>
-        <source src="//yohoho.cc/yo.mp4" type="video/mp4">
-      </video>
-      <script src="//yohoho.cc/yo.js"></script>
-    </div>
-  </body>
-</html>
+  function updateKinopoisk() {
+    const input = document.getElementById('kinopoisk-input');
+    const kinopoiskValue = input.value;
+    const video = document.getElementById('yohoho');
+
+    if (kinopoiskValue) {
+      video.setAttribute('data-kinopoisk', kinopoiskValue);
+    } else {
+      video.removeAttribute('data-kinopoisk');
+    }
+
+    updateVideoStyle();
+  }
+
+  function updateVideoStyle() {
+    const video = document.getElementById('yohoho');
+    const kinopoiskValue = video.getAttribute('data-kinopoisk');
+
+    if (!kinopoiskValue) {
+      video.style.backgroundColor = '#242424';
+      video.style.display = 'flex';
+      video.style.justifyContent = 'center';
+      video.style.alignItems = 'center';
+    } else {
+      video.style.backgroundColor = '';
+      video.style.display = '';
+      video.style.justifyContent = '';
+      video.style.alignItems = '';
+    }
+  }
+</script>
+
+<style>
+  video:not([data-kinopoisk]) {
+    background-color: #242424;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
