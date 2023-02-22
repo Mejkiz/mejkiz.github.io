@@ -22,59 +22,73 @@
         height: 463px;
         object-fit: cover;
       }
-      #search-container {
+      #input-container {
         position: absolute;
-        top: 10%;
+        top: 20%;
         left: 50%;
-        transform: translate(-50%, 0);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        transform: translateX(-50%);
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         z-index: 1;
+        margin-top: 50px;
       }
-      #search-input {
+      #input-container input {
         padding: 5px;
         margin-right: 10px;
       }
-      #search-button {
-        padding: 5px 10px;
-        background-color: #007bff;
-        color: #fff;
+      #input-container button {
+        background-color: #f2f2f2;
         border: none;
+        padding: 5px 10px;
         border-radius: 5px;
         cursor: pointer;
       }
-      #search-modal {
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        padding: 10px;
-        display: none;
+      #error {
+        color: red;
+        margin-top: 10px;
       }
     </style>
   </head>
   <body>
     <div id="player">
-      <video id="yohoho" data-kinopoisk="689" controls>
+      <div id="input-container">
+        <input type="text" placeholder="ID КиноПоиска">
+        <button>Найти</button>
+        <div id="error"></div>
+      </div>
+      <video id="yohoho" data-kinopoisk="689"  controls>
         <source src="//yohoho.cc/yo.mp4" type="video/mp4">
       </video>
       <script src="//yohoho.cc/yo.js"></script>
-      <div id="search-container">
-        <input id="search-input" type="text" placeholder="ID КиноПоиска">
-        <button id="search-button">Найти</button>
-      </div>
-    </div>
-    <div id="search-modal">
-      Эта функция временно не работает
     </div>
     <script>
-      var searchButton = document.getElementById('search-button');
-      var searchModal = document.getElementById('search-modal');
-      searchButton.addEventListener('click', function() {
-        searchModal.style.display = 'block';
-      });
+      const inputContainer = document.getElementById("input-container");
+      const error = document.getElementById("error");
+      const timeoutDuration = 3000;
+
+      const hideError = () => {
+        error.textContent = "";
+      };
+
+      const showError = (message) => {
+        error.textContent = message;
+        setTimeout(hideError, timeoutDuration);
+      };
+
+      const handleSearchClick = () => {
+        const input = inputContainer.querySelector("input");
+        const kinopoiskId = input.value;
+        if (!kinopoiskId) {
+          showError("Введите ID КиноПоиска");
+          return;
+        }
+        showError("Эта функция временно не работает");
+      };
+
+      const searchButton = inputContainer.querySelector("button");
+      searchButton.addEventListener("click", handleSearchClick);
     </script>
   </body>
 </html>
