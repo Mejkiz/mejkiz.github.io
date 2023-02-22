@@ -5,7 +5,7 @@
     <title>Test</title>
     <style>
       body {
-        background-color: #242424;
+        background-color: #282828;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -13,21 +13,55 @@
         margin: 0;
       }
       #player {
-        width: 600px;
-        height: 300px;
+        width: 800px;
+        height: 450px;
+        position: relative;
       }
       video {
         width: 100%;
         height: 100%;
       }
+      #form-container {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333333;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 500px;
+      }
+      input[type="text"] {
+        width: 70%;
+        padding: 5px;
+        border: none;
+        background-color: #444444;
+        color: #ffffff;
+      }
+      input[type="submit"] {
+        width: 28%;
+        padding: 5px;
+        border: none;
+        background-color: #4CAF50;
+        color: #ffffff;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
     <div id="player">
-      <video id="yohoho" data-kinopoisk="1177510"  controls>
+      <video id="yohoho" data-kinopoisk="1177510" controls>
         <source src="//yohoho.cc/yo.mp4" type="video/mp4">
       </video>
       <script src="//yohoho.cc/yo.js"></script>
+      <div id="form-container">
+        <input type="text" placeholder="Введите ID фильма на КиноПоиске">
+        <input type="submit" value="Применить">
+      </div>
     </div>
   </body>
 </html>
