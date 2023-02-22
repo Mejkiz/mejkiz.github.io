@@ -1,112 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Video Player</title>
-  <style>
-    body {
-      background-color: #242424;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    #player-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 70vh;
-      margin-top: 50px;
-    }
-
-    #player {
-      max-width: 80%;
-    }
-
-    #kinopoisk-input {
-      display: block;
-      margin: 20px auto;
-      padding: 10px;
-      border-radius: 5px;
-      border: none;
-      background-color: #313131;
-      color: white;
-      width: 50%;
-      text-align: center;
-    }
-
-    #kinopoisk-input:focus {
-      outline: none;
-    }
-
-    #apply-button {
-      display: block;
-      margin: 0 auto;
-      padding: 10px;
-      border-radius: 5px;
-      border: none;
-      background-color: #313131;
-      color: white;
-      width: 150px;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    #apply-button:hover {
-      background-color: #424242;
-    }
-  </style>
-</head>
-<body>
-  <div id="player-container">
-    <div id="player"></div>
-  </div>
-  
-  <input type="text" id="kinopoisk-input" placeholder="Введите ID фильма на КиноПоиске">
-  <button id="apply-button">Применить</button>
-
-  <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="//cdn.plyr.io/3.6.8/plyr.js"></script>
-  <script>
-    function setupPlayer() {
-      var playerDiv = document.querySelector('#player');
-      var kinopoiskInput = document.querySelector('#kinopoisk-input');
-
-      if (!kinopoiskInput.value) {
-        playerDiv.style.display = 'none';
-        return;
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PepoPoporn</title>
+    <style>
+      body {
+        background-color: #242424;
       }
-
-      playerDiv.style.display = 'block';
-
-      $.getJSON(`https://cors-anywhere.herokuapp.com/https://www.kinopoisk.ru/ajax/player_kp/${kinopoiskInput.value}/`, function(data) {
-        if (!data) {
-          console.log('Invalid Kinopoisk ID');
-          return;
-        }
-
-        var videoSource = data.hls_1080 || data.hls_720 || data.hls_480 || data.hls_360;
-
-        var player = new Plyr('#player', {
-          "controls": ["play", "progress", "current-time", "mute", "volume", "fullscreen"]
-        });
-
-        player.source = {
-          type: 'video',
-          sources: [
-            {
-              src: videoSource,
-              type: 'application/x-mpegURL',
-              size: 1080,
-            },
-          ],
-        };
-      });
-    }
-
-    $('#apply-button').click(function() {
-      setupPlayer();
-    });
-  </script>
-</body>
+      #player {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #yohoho {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player" style="width: 100%; height: 100%;">
+      <video id="yohoho" data-kinopoisk="ID"  controls>
+        <source src="//yohoho.cc/yo.mp4" type="video/mp4">
+      </video>
+      <script src="//yohoho.cc/yo.js"></script>
+    </div>
+  </body>
 </html>
