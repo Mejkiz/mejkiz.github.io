@@ -14,6 +14,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      position: relative;
     }
 
     input[type="text"] {
@@ -25,6 +26,8 @@
       width: 300px;
       background-color: #fff;
       color: #242424;
+      position: absolute;
+      top: 0;
     }
 
     button[type="submit"] {
@@ -35,6 +38,7 @@
       background-color: #4CAF50;
       color: #fff;
       cursor: pointer;
+      float: right;
     }
   </style>
 </head>
@@ -42,13 +46,12 @@
 <body>
   <div id="player">
     <video id="yohoho" data-kinopoisk="ID" controls>
-      <source src="//yohoho.cc/yo.mp4" type="video/mp4">
+      <script src="//yohoho.cc/yo.js"></script>
     </video>
     <form>
       <input type="text" id="movie-id" name="movie-id" placeholder="Введите ID фильма на КиноПоиске">
       <button type="submit">Применить</button>
     </form>
-    <script src="//yohoho.cc/yo.js"></script>
   </div>
 </body>
 
