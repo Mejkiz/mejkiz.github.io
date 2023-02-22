@@ -21,7 +21,7 @@
       align-items: center;
       justify-content: center;
       width: 650px;
-      height: 250px;
+      height: 225px;
       position: relative;
       margin-top: 20px;
     }
@@ -34,7 +34,8 @@
       justify-content: space-between;
       align-items: center;
       width: 500px;
-      margin-top: -200px;
+      margin-top: -400px;
+      vertical-align: 15px;
     }
 
     input[type="text"] {
@@ -73,13 +74,13 @@
     <input type="submit" value="Применить" onclick="showError()">
   </div>
   <div id="player-container">
-  <video id="yohoho" data-kinopoisk="1177510" controls>
-    <source src="//yohoho.cc/yo.mp4" type="video/mp4">
-  </video>
-  <script src="//yohoho.cc/yo.js"></script>
-  <div id="error-box">
-    Эта функция временно не работает
-  </div>
+    <video id="yohoho" data-kinopoisk="1177510" controls>
+      <source src="//yohoho.cc/yo.mp4" type="video/mp4">
+    </video>
+    <script src="//yohoho.cc/yo.js"></script>
+    <div id="error-box">
+      Эта функция временно не работает
+    </div>
   </div>
   <script>
     function showError() {
