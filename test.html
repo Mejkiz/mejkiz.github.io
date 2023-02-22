@@ -36,26 +36,31 @@
     </style>
   </head>
   <body>
-    <video id="yohoho" data-kinopoisk="401522" controls>
-      <source src="//yohoho.cc/yo.mp4" type="video/mp4">
-    </video>
+    <div id="video-container"></div>
 
     <label for="kinopoisk-input">Введите значение атрибута "data-kinopoisk":</label>
     <input id="kinopoisk-input" type="text">
     <button onclick="updateKinopoisk()">Применить</button>
 
-    <script src="//yohoho.cc/yo.js"></script>
     <script>
       function updateKinopoisk() {
         const input = document.getElementById('kinopoisk-input');
         const kinopoiskValue = input.value;
-        const video = document.getElementById('yohoho');
 
-        if (kinopoiskValue) {
-          video.setAttribute('data-kinopoisk', kinopoiskValue);
-        } else {
-          video.removeAttribute('data-kinopoisk');
-        }
+        const container = document.getElementById('video-container');
+        container.innerHTML = '';
+
+        const video = document.createElement('video');
+        video.setAttribute('id', 'yohoho');
+        video.setAttribute('data-kinopoisk', kinopoiskValue);
+        video.setAttribute('controls', '');
+
+        const source = document.createElement('source');
+        source.setAttribute('src', '//yohoho.cc/yo.mp4');
+        source.setAttribute('type', 'video/mp4');
+
+        video.appendChild(source);
+        container.appendChild(video);
 
         updateVideoStyle();
       }
@@ -68,7 +73,7 @@
           video.style.backgroundColor = '';
           video.style.marginTop = '';
         } else {
-          video.style.backgroundColor = '#'+kinopoiskValue;
+          video.style.backgroundColor = '#' + kinopoiskValue;
           video.style.marginTop = '20px';
         }
       }
