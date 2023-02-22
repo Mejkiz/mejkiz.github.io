@@ -2,73 +2,53 @@
 <html>
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Player Example</title>
+  <meta charset="utf-8">
+  <title>Test</title>
   <style>
     body {
-      background-color: #282828;
+      background-color: #242424;
+    }
+
+    #player {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
-      margin: 0;
-    }
-    #player-container {
-      width: 100%;
-      height: 500px;
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
-    #input-container {
-      padding: 20px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    #input-container label {
-      color: #fff;
+    input[type="text"] {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
       margin-right: 10px;
+      width: 300px;
+      background-color: #fff;
+      color: #242424;
     }
 
-    #input-container input[type="text"] {
-      background-color: #333;
-      border: none;
-      padding: 5px;
-      color: #fff;
-    }
-
-    #input-container button {
-      background-color: #d11e3d;
-      color: #fff;
-      border: none;
+    button[type="submit"] {
+      font-size: 16px;
       padding: 10px 20px;
-      margin-left: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #4CAF50;
+      color: #fff;
       cursor: pointer;
-    }
-
-    #input-container button:hover {
-      background-color: #b11b35;
     }
   </style>
 </head>
 
 <body>
-  <div id="input-container">
-    <label for="film-id">Введите ID фильма на КиноПоиске:</label>
-    <input type="text" id="film-id" name="film-id" placeholder="ID фильма" />
-    <button id="apply-btn">Применить</button>
-  </div>
-  <div id="player-container" style="width: 1900px; height: 900px;">
-      <video id="yohoho" data-kinopoisk="ID"  controls>
-      <source src="//yohoho.cc/yo.mp4" type="video/mp4" >
-      </video>
-      <script src="//yohoho.cc/yo.js" ></script>
+  <div id="player">
+    <video id="yohoho" data-kinopoisk="ID" controls>
+      <source src="//yohoho.cc/yo.mp4" type="video/mp4">
+    </video>
+    <form>
+      <input type="text" id="movie-id" name="movie-id" placeholder="Введите ID фильма на КиноПоиске">
+      <button type="submit">Применить</button>
+    </form>
+    <script src="//yohoho.cc/yo.js"></script>
   </div>
 </body>
 
