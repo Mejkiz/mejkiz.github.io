@@ -26,11 +26,6 @@
       margin-top: 20px;
     }
 
-    #player {
-      width: 120%;
-      height: 120%;
-    }
-
     #form-container {
       background-color: #333333;
       padding: 5px;
@@ -77,11 +72,9 @@
     <input type="text" placeholder="Введите ID фильма на КиноПоиске">
     <input type="submit" value="Применить" onclick="showError()">
   </div>
-  <div id="player-container">
-    <video id="yohoho" data-kinopoisk="1177510" controls>
-      <source src="//yohoho.cc/yo.mp4" type="video/mp4">
-    </video>
-  </div>
+  <video id="player-container" data-kinopoisk="1177510" controls>
+    <source src="//yohoho.cc/yo.mp4" type="video/mp4">
+  </video>
   <script src="//yohoho.cc/yo.js"></script>
   <div id="error-box">
     Эта функция временно не работает
