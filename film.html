@@ -2,8 +2,8 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>Test</title>
+  <meta charset="UTF-8" />
+  <title>Player Example</title>
   <style>
     body {
       background-color: #282828;
@@ -15,82 +15,55 @@
       margin: 0;
     }
 
-    #yohoho {
+    #player-container {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 20px;
+    }
+
+    #input-container {
+      padding: 20px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      position: relative;
-      margin-top: 300px;
-      margin-top: 20px;
-      margin-top: 150px
     }
 
-    #form-container {
-      background-color: #333333;
-      padding: 5px;
-      border-radius: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 500px;
-      margin-top: -300px;
-      vertical-align: 15px;
+    #input-container label {
+      color: #fff;
+      margin-right: 10px;
     }
 
-    input[type="text"] {
-      width: 70%;
-      padding: 5px;
+    #input-container input[type="text"] {
+      background-color: #333;
       border: none;
-      background-color: #444444;
-      color: #ffffff;
+      padding: 5px;
+      color: #fff;
     }
 
-    input[type="submit"] {
-      width: 28%;
-      padding: 5px;
+    #input-container button {
+      background-color: #d11e3d;
+      color: #fff;
       border: none;
-      background-color: #4CAF50;
-      color: #ffffff;
+      padding: 10px 20px;
+      margin-left: 10px;
       cursor: pointer;
     }
 
-    #error-box {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background-color: #FF5252;
-      color: #ffffff;
-      padding: 10px;
-      border-radius: 5px;
-      display: none;
+    #input-container button:hover {
+      background-color: #b11b35;
     }
   </style>
 </head>
 
 <body>
-  <div id="form-container">
-    <input type="text" placeholder="Введите ID фильма на КиноПоиске">
-    <input type="submit" value="Применить" onclick="showError()">
-  </div>
   <div id="player-container">
-    <video id="yohoho" data-kinopoisk="1177510" controls>
-      <source src="//yohoho.cc/yo.mp4" type="video/mp4">
-    </video>
-    <script src="//yohoho.cc/yo.js"></script>
-    <div id="error-box">
-      Эта функция временно не работает
-    </div>
+    <div id="player"></div>
   </div>
-  <script>
-    function showError() {
-      var errorBox = document.getElementById("error-box");
-      errorBox.style.display = "block";
-      setTimeout(function () {
-        errorBox.style.display = "none";
-      }, 3000);
-    }
-  </script>
+  <div id="input-container">
+    <label for="film-id">Введите ID фильма на КиноПоиске:</label>
+    <input type="text" id="film-id" name="film-id" placeholder="ID фильма" />
+    <button id="apply-btn">Применить</button>
+  </div>
+  <script src="//yohoho.cc/yo.js"></script>
 </body>
 
 </html>
