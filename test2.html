@@ -1,24 +1,7 @@
-<div id="yohoho" data-kinopoisk="401522"></div>
-<script src="//yohoho.cc/yo.js"></script>
 <script>
-  // Получить значение параметра строки URL "id"
-  var id = new URLSearchParams(window.location.search).get('id');
-  
-  // Если значение "id" не равно null, изменить значение атрибута "data-kinopoisk" и добавить элемент для вывода "id" внизу страницы
-  if (id !== null) {
-    document.getElementById("yohoho").setAttribute("data-kinopoisk", id);
-    
-    // Создать элемент для вывода значения "id"
-    var idElement = document.createElement("div");
-    idElement.innerHTML = "ID: " + id;
-    idElement.style.position = "fixed";
-    idElement.style.bottom = "0";
-    idElement.style.left = "0";
-    idElement.style.fontSize = "14px";
-    idElement.style.fontWeight = "bold";
-    idElement.style.backgroundColor = "#fff";
-    
-    // Добавить элемент "idElement" внизу страницы
-    document.body.appendChild(idElement);
-  }
+  var urlParams = new URLSearchParams(window.location.search);
+  var id = urlParams.get("id");
 </script>
+
+<div id="yohoho" data-kinopoisk="${id}"></div>
+<script src="//yohoho.cc/yo.js"></script>
