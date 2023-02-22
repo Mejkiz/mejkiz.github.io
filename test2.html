@@ -1,0 +1,14 @@
+<div id="yohoho" data-kinopoisk="401522"></div>
+<input type="text" id="kinopoiskIdInput" placeholder="Введите новый ID">
+<button type="button" onclick="changeKinopoiskId()">Изменить ID</button>
+
+<script src="https://yohoho.cc/yo.js"></script>
+<script>
+  const yohohoPlayer = new YoHohoPlayer('yohoho');
+
+  function changeKinopoiskId() {
+    const kinopoiskIdInput = document.getElementById('kinopoiskIdInput');
+    const newKinopoiskId = kinopoiskIdInput.value;
+    yohohoPlayer.setKinopoiskId(newKinopoiskId);
+  }
+</script>
