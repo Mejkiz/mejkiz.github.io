@@ -1,82 +1,112 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Пример изменения атрибута элемента video</title>
-    <style>
-      body {
-        background-color: #242424;
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Player</title>
+  <style>
+    body {
+      background-color: #242424;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #player-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+      margin-top: 50px;
+    }
+
+    #player {
+      max-width: 80%;
+    }
+
+    #kinopoisk-input {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #313131;
+      color: white;
+      width: 50%;
+      text-align: center;
+    }
+
+    #kinopoisk-input:focus {
+      outline: none;
+    }
+
+    #apply-button {
+      display: block;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #313131;
+      color: white;
+      width: 150px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    #apply-button:hover {
+      background-color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div id="player-container">
+    <div id="player"></div>
+  </div>
+  
+  <input type="text" id="kinopoisk-input" placeholder="Введите ID фильма на КиноПоиске">
+  <button id="apply-button">Применить</button>
+
+  <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="//cdn.plyr.io/3.6.8/plyr.js"></script>
+  <script>
+    function setupPlayer() {
+      var playerDiv = document.querySelector('#player');
+      var kinopoiskInput = document.querySelector('#kinopoisk-input');
+
+      if (!kinopoiskInput.value) {
+        playerDiv.style.display = 'none';
+        return;
       }
 
-      #yohoho {
-        max-width: 600px;
-        margin: 0 auto;
-      }
+      playerDiv.style.display = 'block';
 
-      input[type="text"] {
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-        margin-top: 10px;
-        font-size: 16px;
-        background-color: #333;
-        color: #fff;
-      }
-
-      button {
-        background-color: #333;
-        border: none;
-        color: #fff;
-        padding: 12px 24px;
-        text-align: center;
-        border-radius: 4px;
-        margin-left: 10px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="video-container"></div>
-
-    <label for="kinopoisk-input">Введите значение атрибута "data-kinopoisk":</label>
-    <input id="kinopoisk-input" type="text">
-    <button onclick="updateKinopoisk()">Применить</button>
-
-    <script>
-      function updateKinopoisk() {
-        const input = document.getElementById('kinopoisk-input');
-        const kinopoiskValue = input.value;
-
-        const container = document.getElementById('video-container');
-        container.innerHTML = '';
-
-        const video = document.createElement('video');
-        video.setAttribute('id', 'yohoho');
-        video.setAttribute('data-kinopoisk', kinopoiskValue);
-        video.setAttribute('controls', '');
-
-        const source = document.createElement('source');
-        source.setAttribute('src', `//yohoho.cc/${kinopoiskValue}.mp4`);
-        source.setAttribute('type', 'video/mp4');
-
-        video.appendChild(source);
-        container.appendChild(video);
-
-        updateVideoStyle();
-      }
-
-      function updateVideoStyle() {
-        const video = document.getElementById('yohoho');
-        const kinopoiskValue = video.getAttribute('data-kinopoisk');
-
-        if (!kinopoiskValue) {
-          video.style.backgroundColor = '';
-          video.style.marginTop = '';
-        } else {
-          video.style.backgroundColor = '#' + kinopoiskValue;
-          video.style.marginTop = '20px';
+      $.getJSON(`https://cors-anywhere.herokuapp.com/https://www.kinopoisk.ru/ajax/player_kp/${kinopoiskInput.value}/`, function(data) {
+        if (!data) {
+          console.log('Invalid Kinopoisk ID');
+          return;
         }
-      }
-    </script>
-  </body>
+
+        var videoSource = data.hls_1080 || data.hls_720 || data.hls_480 || data.hls_360;
+
+        var player = new Plyr('#player', {
+          "controls": ["play", "progress", "current-time", "mute", "volume", "fullscreen"]
+        });
+
+        player.source = {
+          type: 'video',
+          sources: [
+            {
+              src: videoSource,
+              type: 'application/x-mpegURL',
+              size: 1080,
+            },
+          ],
+        };
+      });
+    }
+
+    $('#apply-button').click(function() {
+      setupPlayer();
+    });
+  </script>
+</body>
 </html>
