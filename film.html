@@ -1,58 +1,86 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <title>Test</title>
-  <style>
-    body {
-      background-color: #242424;
-    }
-
-    #player {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      position: relative;
-    }
-
-    input[type="text"] {
-      font-size: 16px;
-      padding: 10px;
-      border-radius: 5px;
-      border: none;
-      margin-right: 10px;
-      width: 300px;
-      background-color: #fff;
-      color: #242424;
-      position: absolute;
-      top: 0;
-    }
-
-    button[type="submit"] {
-      font-size: 16px;
-      padding: 10px 20px;
-      border-radius: 5px;
-      border: none;
-      background-color: #4CAF50;
-      color: #fff;
-      cursor: pointer;
-      float: right;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="player">
-    <video id="yohoho" data-kinopoisk="ID" controls>
+  <head>
+    <meta charset="utf-8">
+    <title>PepoPoporn</title>
+    <style>
+      body {
+        background-color: #242424;
+        margin: 0;
+        padding: 0;
+      }
+      #player {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        position: relative; /* добавляем позиционирование родительскому элементу */
+      }
+      #yohoho {
+        width: 812px; 
+        height: 463px;
+        object-fit: cover;
+      }
+      #input-container {
+        position: absolute;
+        top: 20px; /* располагаем контейнер ввода над видео и чуть выше центра */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2; /* выносим контейнер ввода на передний план */
+      }
+      input[type="text"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #2f2f2f; /* меняем цвет фона на светлее */
+        color: #fff;
+      }
+      button[type="submit"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #2f2f2f; /* меняем цвет фона кнопки на светлее */
+        color: #fff;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      #error-message {
+        position: absolute;
+        bottom: 20px; /* располагаем сообщение об ошибке в правом нижнем углу */
+        right: 20px;
+        background-color: #f44336; /* меняем цвет фона на красный */
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player">
+      <div id="input-container"> <!-- добавляем контейнер для ввода и кнопки -->
+        <input type="text" id="kinopoisk-id" placeholder="ID КиноПоиска">
+        <button type="submit" id="search-button">Найти</button>
+      </div>
+      <video id="yohoho" data-kinopoisk="689" controls>
+      </video>
+      <div id="error-message"></div> <!-- добавляем контейнер для сообщения об ошибке -->
       <script src="//yohoho.cc/yo.js"></script>
-    </video>
-    <form>
-      <input type="text" id="movie-id" name="movie-id" placeholder="Введите ID фильма на КиноПоиске">
-      <button type="submit">Применить</button>
-    </form>
-  </div>
-</body>
+    </div>
+    <script>
+      const errorMessage = document.getElementById('error-message');
+      const searchButton = document.getElementById('search-button');
+      const kinopoiskInput = document.getElementById('kinopoisk-id');
 
-</html>
+      searchButton.addEventListener('click', () => {
+          console.log(kinopoiskInput)
+          errorMessage.innerText = 'Ошибка: Функция поиска фильмов не работает';
+          errorMessage.style.display = 'block';
+          setTimeout(() => {
+            errorMessage.style.display = 'none';
+          }, 3000);
+      });
+    </script>
+  </body>
+</head>
