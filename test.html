@@ -1,81 +1,77 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>Пример изменения атрибута элемента video</title>
-  <style>
-    body {
-      background-color: #242424;
-    }
-
-    #yohoho {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    input[type="text"] {
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-      margin-top: 10px;
-      font-size: 16px;
-      background-color: #333;
-      color: #fff;
-    }
-
-    button {
-      background-color: #333;
-      border: none;
-      color: #fff;
-      padding: 12px 24px;
-      text-align: center;
-      border-radius: 4px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-
-<body>
-  <video id="yohoho" data-kinopoisk="" controls>
-    <source src="//yohoho.cc/yo.mp4" type="video/mp4">
-  </video>
-
-  <label for="kinopoisk-input">Введите значение атрибута "data-kinopoisk":</label>
-  <input id="kinopoisk-input" type="text">
-  <button onclick="updateKinopoisk()">Применить</button>
-
-  <script src="//yohoho.cc/yo.js"></script>
-  <script>
-    function updateKinopoisk() {
-      const input = document.getElementById('kinopoisk-input');
-      const kinopoiskValue = input.value;
-      const video = document.getElementById('yohoho');
-
-      if (kinopoiskValue) {
-        video.setAttribute('data-kinopoisk', kinopoiskValue);
-      } else {
-        video.removeAttribute('data-kinopoisk');
+  <head>
+    <title>Пример изменения атрибута элемента video</title>
+    <style>
+      body {
+        background-color: #242424;
       }
 
-      updateVideoStyle();
-    }
-
-    function updateVideoStyle() {
-      const video = document.getElementById('yohoho');
-      const kinopoiskValue = video.getAttribute('data-kinopoisk');
-
-      if (!kinopoiskValue) {
-        video.style.backgroundColor = '#242424';
-        video.style.display = 'flex';
-        video.style.justifyContent = 'center';
-        video.style.alignItems = 'center';
-      } else {
-        video.style.backgroundColor = '';
-        video.style.display = '';
-        video.style.justifyContent = '';
-        video.style.alignItems = '';
+      #yohoho {
+        max-width: 600px;
+        margin: 0 auto;
       }
-    }
-  </script>
+
+      input[type="text"] {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        margin-top: 10px;
+        font-size: 16px;
+        background-color: #333;
+        color: #fff;
+      }
+
+      button {
+        background-color: #333;
+        border: none;
+        color: #fff;
+        padding: 12px 24px;
+        text-align: center;
+        border-radius: 4px;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <video id="yohoho" data-kinopoisk="401522" controls>
+      <source src="//yohoho.cc/yo.mp4" type="video/mp4">
+    </video>
+
+    <label for="kinopoisk-input">Введите значение атрибута "data-kinopoisk":</label>
+    <input id="kinopoisk-input" type="text">
+    <button onclick="updateKinopoisk()">Применить</button>
+
+    <script src="//yohoho.cc/yo.js"></script>
+    <script>
+      function updateKinopoisk() {
+        const input = document.getElementById('kinopoisk-input');
+        const kinopoiskValue = input.value;
+        const video = document.getElementById('yohoho');
+
+        if (kinopoiskValue) {
+          video.setAttribute('data-kinopoisk', kinopoiskValue);
+        } else {
+          video.removeAttribute('data-kinopoisk');
+        }
+
+        updateVideoStyle();
+      }
+
+      function updateVideoStyle() {
+        const video = document.getElementById('yohoho');
+        const kinopoiskValue = video.getAttribute('data-kinopoisk');
+
+        if (!kinopoiskValue) {
+          video.style.backgroundColor = '';
+          video.style.marginTop = '';
+        } else {
+          video.style.backgroundColor = '#'+kinopoiskValue;
+          video.style.marginTop = '20px';
+        }
+      }
+    </script>
+  </body>
+</html>
