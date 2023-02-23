@@ -25,9 +25,22 @@
   </head>
   <body>
     <div id="player">
-      <video id="yohoho" data-kinopoisk="689"  controls>
-        <source src="//yohoho.cc/yo.mp4" type="video/mp4">
+      <video id="yohoho" data-kinopoisk=""  controls>
       </video>
+      <script>
+        // Получаем значение параметра film_id из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const filmId = urlParams.get('film_id');
+
+        // Проверяем, есть ли параметр film_id в URL-адресе
+        if (!filmId) {
+          window.location.href = 'https://mejkiz.com/index2.js';
+        } else {
+          // Присваиваем значение filmId атрибуту data-kinopoisk элемента <video>
+          const videoElement = document.getElementById('yohoho');
+          videoElement.dataset.kinopoisk = filmId;
+        }
+      </script>
       <script src="//yohoho.cc/yo.js"></script>
     </div>
   </body>
