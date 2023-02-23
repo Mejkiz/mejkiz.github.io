@@ -57,7 +57,7 @@
 	</style>
 </head>
 <body>
-	<h1 style="margin-bottom: 50px;">Yohoho</h1>
+	<h1 style="margin-bottom: 20px;">Yohoho</h1>
 	<form onsubmit="searchFilm(event)">
 		<input type="text" id="filmId" placeholder="Введите ID фильма на КиноПоиске">
 		<input type="submit" value="Найти">
@@ -70,7 +70,7 @@
 
 			const filmId = document.getElementById("filmId").value.trim();
 
-			if (filmId === "") {
+			if (!filmId) {
 				showError("Вы не ввели ID фильма");
 				return;
 			}
