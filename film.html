@@ -34,7 +34,7 @@
 
         // Проверяем, есть ли параметр film_id в URL-адресе
         if (!filmId) {
-          window.location.href = 'https://mejkiz.com/index2.js';
+          window.location.href = `https://${location.hostname}/films.html`;
         } else {
           // Присваиваем значение filmId атрибуту data-kinopoisk элемента <video>
           const videoElement = document.getElementById('yohoho');
