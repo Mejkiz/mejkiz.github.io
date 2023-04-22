@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>Поиск фильма и просмотр</title>
@@ -39,12 +40,6 @@
 			left: 5px;
 		}
 
-		h1 {
-			color: white;
-			font-size: 48px;
-			margin-bottom: 50px;
-		}
-
 		#error {
 			background-color: #f44336;
 			color: white;
@@ -73,13 +68,16 @@
 		}
 	</style>
 </head>
+
 <body>
-	<h1 style="margin-bottom: 20px;">Yohoho</h1>
-	<form onsubmit="searchFilm(event)">
-		<input type="text" id="filmId" placeholder="Введите ID фильма на КиноПоиске">
-		<input type="submit" value="Найти">
-	</form>
-	<div id="error"></div>
+	<div id="search-container">
+		<h1 id="title" style="margin-bottom: 20px;">Yohoho</h1>
+		<form onsubmit="searchFilm(event)">
+			<input type="text" id="filmId" placeholder="Введите ID фильма на КиноПоиске">
+			<input type="submit" value="Найти">
+		</form>
+		<div id="error"></div>
+	</div>
 	<div id="player">
 		<video id="yohoho" data-kinopoisk="" controls></video>
 	</div>
@@ -89,6 +87,9 @@
 		const filmId = urlParams.get('film_id');
 
 		if (filmId) {
+			document.getElementById("title").style.display = "none";
+			document.getElementById("search-container").style.position = "absolute";
+			document.getElementById("search-container").style.top = "10px";
 			document.getElementById("filmId").value = filmId;
 			document.getElementById("player").style.display = "flex";
 			const videoElement = document.getElementById('yohoho');
@@ -105,22 +106,25 @@
 
 			if (!filmId) {
 				showError("Вы не ввели ID фильма");
-return;
-}
-		if (!/^[0-9]+$/.test(filmId)) {
-			showError("ID фильма должен состоять только из цифр");
-			return;
+				return;
+			}
+			if (!/^[0-9]+$/.test(filmId)) {
+				showError("ID фильма должен состоять только из цифр");
+				return;
+			}
+
+			window.location.href = `http://${location.hostname}/test?film_id=${filmId}`;
 		}
 
-		window.location.href = `http://${location.hostname}/test?film_id=${filmId}`;
-	}
+		function showError(errorMessage) {
+			const error = document.getElementById("error");
+			error.innerText = errorMessage;
+			error.style.display = "block";
+			setTimeout(() => {
+				error.style.display = "none";
+			}, 3000);
+		}
+	</script>
+</body>
 
-	function showError(errorMessage) {
-		const error = document.getElementById("error");
-		error.innerText = errorMessage;
-		error.style.display = "block";
-		setTimeout(() => {
-			error.style.display = "none";
-		}, 3000);
-	}
-</script>
+</html>
