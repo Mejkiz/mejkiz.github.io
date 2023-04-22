@@ -1,47 +1,139 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>PepoPoporn</title>
-    <style>
-      body {
-        background-color: #242424;
-        margin: 0;
-        padding: 0;
-      }
-      #player {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100vh;
-      }
-      #yohoho {
-        width: 812px; 
-        height: 463px;
-        object-fit: cover;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="player">
-      <video id="yohoho" data-kinopoisk=""  controls>
-      </video>
-      <script>
-        // Получаем значение параметра film_id из URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const filmId = urlParams.get('film_id');
 
-        // Проверяем, есть ли параметр film_id в URL-адресе
-        if (!filmId) {
-          window.location.href = `https://${location.hostname}/films.html`;
-        } else {
-          // Присваиваем значение filmId атрибуту data-kinopoisk элемента <video>
-          const videoElement = document.getElementById('yohoho');
-          videoElement.dataset.kinopoisk = filmId;
-        }
-      </script>
-      <script src="//yohoho.cc/yo.js"></script>
-    </div>
-  </body>
+<head>
+	<meta charset="utf-8">
+	<title>Поиск фильма и просмотр</title>
+	<style>
+		body {
+			background-color: #242424;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+		}
+
+		input[type="text"] {
+			background-color: #2f2f2f;
+			color: white;
+			border: none;
+			padding: 10px;
+			border-radius: 5px;
+			width: 275px;
+			margin-bottom: 20px;
+			text-align: center;
+			font-size: 16px;
+		}
+
+		input[type="submit"] {
+			background-color: #2f2f2f;
+			color: white;
+			border: none;
+			padding: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			position: relative;
+			left: 5px;
+		}
+
+		#error {
+			background-color: #f44336;
+			color: white;
+			border-radius: 5px;
+			padding: 10px;
+			display: none;
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			z-index: 9999;
+			font-size: 14px;
+		}
+
+		#player {
+			display: none;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100vh;
+		}
+
+		#yohoho {
+			width: 812px;
+			height: 463px;
+			object-fit: cover;
+		}
+
+		#title {
+			color: white;
+			font-size: 48px;
+			margin-bottom: 20px;
+			margin-left: 50px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="search-container">
+		<h1 id="title">Yohoho</h1>
+		<form onsubmit="searchFilm(event)">
+			<input type="text" id="filmId" placeholder="Введите ID фильма на КиноПоиске">
+			<input type="submit" value="Найти">
+		</form>
+		<div id="error"></div>
+	</div>
+	<div id="player">
+		<video id="yohoho" data-kinopoisk="" controls></video>
+	</div>
+
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		const filmId = urlParams.get('film_id');
+
+		if (filmId) {
+			document.getElementById("title").style.display = "none";
+			document.getElementById("search-container").style.position = "absolute";
+			document.getElementById("search-container").style.top = "10px";
+			document.getElementById("filmId").value = filmId;
+			document.getElementById("player").style.display = "flex";
+			const videoElement = document.getElementById('yohoho');
+			videoElement.dataset.kinopoisk = filmId;
+			const script = document.createElement('script');
+			script.src = '//yohoho.cc/yo.js';
+			document.body.appendChild(script);
+		} else {
+			document.getElementById("title").style.marginLeft = "50px";
+		}
+
+		function searchFilm(event) {
+			event.preventDefault();
+			const filmId = document.getElementById("filmId").value.trim();
+
+			if (!filmId) {
+				showError("Вы не ввели ID фильма");
+				return;
+			}
+
+			if (!/^[0-9]+$/.test(filmId)) {
+				showError("ID фильма должен состоять только из цифр");
+				return;
+			}
+
+			window.location.href = `http://${location.hostname}/film?film_id=${filmId}`;
+		}
+
+		function showError(errorMessage) {
+			const error = document.getElementById("error");
+			error.innerText = errorMessage;
+			error.style.display = "block";
+			setTimeout(() => {
+				error.style.display = "none";
+			}, 3000);
+		}
+	</script>
+</body>
+
 </html>
