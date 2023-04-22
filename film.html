@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Поиск фильма и просмотр</title>
-<style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Поиск фильма и просмотр</title>
+	<style>
 		body {
 			background-color: #242424;
 			display: flex;
@@ -33,6 +35,7 @@
 			border: none;
 			padding: 10px;
 			border-radius: 5px;
+			margin-bottom: 20px;
 			cursor: pointer;
 			font-size: 16px;
 			position: relative;
@@ -69,27 +72,66 @@
 		#title {
 			color: white;
 			font-size: 48px;
-			margin-bottom: 20px;
-			margin-left: 50px;
+			margin: 0;
+			top: 265px;
+			right: inherit;
+			position: absolute;
+		}
+
+		.input-container {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			align-items: center;
+			position: relative;
+			top: -10px;
+		}
+
+		@media (max-width: 767px) {
+			input[type="text"] {
+				width: 80%;
+			}
+
+			#title {
+				font-size: 32px;
+				margin-left: 25px;
+			}
+
+			.input-container {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			input[type="submit"] {
+				margin-top: -10px;
+				left: 0;
+			}
+
+			#yohoho {
+				width: 100%;
+				height: auto;
+			}
 		}
 	</style>
 </head>
+
 <body>
-<div id="search-container">
-<h1 id="title">Yohoho</h1>
-<form onsubmit="searchFilm(event)">
-<input type="text" id="filmId" placeholder="Введите ID фильма на КиноПоиске">
-<input type="submit" value="Найти">
-</form>
-<div id="error"></div>
-</div>
-<div id="player">
-<video id="yohoho" data-kinopoisk="" controls></video>
-</div>
-<script>
+	<div id="search-container">
+		<h1 id="title">Yohoho</h1>
+		<form onsubmit="searchFilm(event)">
+			<div class="input-container">
+				<input type="text" id="filmId" placeholder="ID фильма с КП">
+				<input type="submit" value="Найти">
+			</div>
+		</form>
+		<div id="error"></div>
+	</div>
+	<div id="player">
+		<video id="yohoho" data-kinopoisk="" controls></video>
+	</div>
+	<script>
 		const urlParams = new URLSearchParams(window.location.search);
 		const filmId = urlParams.get('film_id');
-
 		if (filmId) {
 			document.getElementById("title").style.display = "none";
 			document.getElementById("search-container").style.position = "absolute";
@@ -132,4 +174,5 @@
 		}
 	</script>
 </body>
+
 </html>
