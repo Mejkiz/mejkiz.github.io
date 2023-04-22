@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/4en4o4/4KPOUNDxCD+laKg/+M3uh1//sV7yAFK" crossorigin="anonymous">
+    <title>Поиск фильма</title>
+    <style>
+        body {
+            background-color: #242424;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        input[type="text"] {
+            background-color: #2f2f2f;
+            color: white;
+            border: none;
+            padding: 10px;
+            padding-left: 40px;
+            border-radius: 5px;
+            width: 275px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #2f2f2f;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            left: 5px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 48px;
+            margin-bottom: 50px;
+        }
+
+        #error {
+            background-color: #f44336;
+            color: white;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 9999;
+            font-size: 14px;
+        }
+
+        @media screen and (max-width: 767px) {
+            input[type="text"], input[type="submit"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input[type="submit"] {
+                position: static;
+                left: auto;
+            }
+
+            h1 {
+                font-size: 32px;
+                text-align: center;
+                margin-left: 0;
+            }
+        }
+
+        i.fas {
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            margin-left: -30px;
+            margin-top: 10px;
+        }
+
+        form {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <h1>Yohoho</h1>
+    <form onsubmit="searchFilm(event)">
+        <i class="fas fa-search"></i>
+        <input type="text" id="filmId" placeholder="Введите ID фильма на КиноПоиске">
+        <input type="submit" value="Найти">
+    </form>
+    <div id="error"></div>
+
+    <script>
+        function searchFilm(event) {
+            event.preventDefault();
+
+            const filmId = document.getElementById("filmId").value.trim();
+
+            if (!filmId) {
+                              showError("Вы не ввели ID фильма");
+                return;
+            }
+
+            if (!/^[0-9]+$/.test(filmId)) {
+                showError("ID фильма должен состоять только из цифр");
+                return;
+            }
+
+            window.location.href = `http://${location.hostname}/test?film_id=${filmId}`;
+        }
+
+        function showError(errorMessage) {
+            const error = document.getElementById("error");
+            error.innerText = errorMessage;
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
