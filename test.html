@@ -66,12 +66,19 @@
 			height: 463px;
 			object-fit: cover;
 		}
+
+		#title {
+			color: white;
+			font-size: 48px;
+			margin-bottom: 20px;
+			margin-left: 50px;
+		}
 	</style>
 </head>
 
 <body>
 	<div id="search-container">
-		<h1 id="title" style="margin-bottom: 20px;">Yohoho</h1>
+		<h1 id="title">Yohoho</h1>
 		<form onsubmit="searchFilm(event)">
 			<input type="text" id="filmId" placeholder="Введите ID фильма на КиноПоиске">
 			<input type="submit" value="Найти">
@@ -97,23 +104,25 @@
 			const script = document.createElement('script');
 			script.src = '//yohoho.cc/yo.js';
 			document.body.appendChild(script);
+		} else {
+			document.getElementById("title").style.marginLeft = "50px";
 		}
 
 		function searchFilm(event) {
 			event.preventDefault();
-
 			const filmId = document.getElementById("filmId").value.trim();
 
 			if (!filmId) {
 				showError("Вы не ввели ID фильма");
 				return;
 			}
+
 			if (!/^[0-9]+$/.test(filmId)) {
 				showError("ID фильма должен состоять только из цифр");
 				return;
 			}
 
-			window.location.href = `http://${location.hostname}/test?film_id=${filmId}`;
+			window.location.href = `http://${location.hostname}?film_id=${filmId}`;
 		}
 
 		function showError(errorMessage) {
