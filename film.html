@@ -84,7 +84,6 @@
 			flex-wrap: wrap;
 			align-items: center;
 			position: relative;
-			top: -10px;
 		}
 
 		@media (max-width: 767px) {
@@ -107,9 +106,15 @@
 				left: 0;
 			}
 
+			#player {
+				position: absolute;
+				top: 50px;
+				height: 60vh;
+			}
+
 			#yohoho {
 				width: 100%;
-				height: auto;
+				height: 100%;
 			}
 		}
 	</style>
@@ -127,7 +132,7 @@
 		<div id="error"></div>
 	</div>
 	<div id="player">
-		<video id="yohoho" data-kinopoisk="" controls></video>
+		<video id="yohoho" data- kinopoisk="" controls></video>
 	</div>
 	<script>
 		const urlParams = new URLSearchParams(window.location.search);
@@ -143,6 +148,9 @@
 			const script = document.createElement('script');
 			script.src = '//yohoho.cc/yo.js';
 			document.body.appendChild(script);
+
+			// Move the input and submit button down by 10px
+			document.querySelector('.input-container').style.top = '5px';
 		} else {
 			document.getElementById("title").style.marginLeft = "50px";
 		}
