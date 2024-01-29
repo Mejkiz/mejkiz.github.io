@@ -66,7 +66,11 @@
         <select id="length">
             <script>
                 for (var i = 6; i <= 64; i++) {
-                    document.write('<option value="' + i + '">' + i + '</option>');
+                    if (i === 16) {
+                        document.write('<option value="' + i + '" selected>' + i + '</option>');
+                    } else {
+                        document.write('<option value="' + i + '">' + i + '</option>');
+                    }
                 }
             </script>
         </select><br>
@@ -74,8 +78,8 @@
         <button type="button" onclick="generatePasswords()">Generate Passwords</button>
     </form>
     <div id="passwords">
-        <span class="close" onclick="closePasswords()">×</span>
+        <span class="close" onclick="closePasswords()">&times;</span>
     </div>
-    <script src="code.js"></script>
+    <script src="passwordGenerator.js"></script>
 </body>
 </html>
